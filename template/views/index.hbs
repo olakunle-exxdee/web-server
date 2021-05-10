@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./css/styles.css" />
+
+    <title>Document</title>
+</head>
+
+<body>
+    {{>header}}
+    {{>footer}}
+
+
+
+    <form>
+        <input class="input" type="search" name="" id="" placeholder="enter location">
+        <button class="btn">search</button>
+    </form>
+
+    <p id="message-1"></p>
+    <p id="message-2"></p>
+    <script>
+
+
+        const weatherForm = document.querySelector("form")
+        const search = document.querySelector(".input")
+        const message1 = document.querySelector("#message-1")
+        const message2 = document.querySelector("#message-2")
+
+
+
+        weatherForm.addEventListener("submit", (e) => {
+            e.preventDefault()
+            const location = search.value
+            message1.textContent = "loading.........."
+            message2.textContent = ""
+
+            const url = `http://localhost:3000/weather?address=${location}`
+            fetch(url).then((response) => {
+                response.json().then((data) => {
+                    if (data.error) {
+                        message1.textContent = data.error
+                        message2.textContent = ""
+                    }
+                    else {
+                        message1.textContent = data.location
+                        message2.textContent = data.forecast
+
+                    }
+                });
+            });
+
+        })
+    </script>
+</body>
+
+
+</html>
