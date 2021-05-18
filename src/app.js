@@ -6,11 +6,10 @@ const forecast = require("./utils//forecast");
 
 const app = express();
 const port = process.env.POST || 3000;
-console.log(port);
 
 // define path for express config
-const viewsPath = path.join(__dirname, "../template/views");
 const publicDirPath = path.join(__dirname, "../public");
+const viewsPath = path.join(__dirname, "../template/views");
 const partialsPath = path.join(__dirname, "../template/partials");
 
 // set handlebars engine and views location
